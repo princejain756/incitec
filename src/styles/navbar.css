@@ -1,0 +1,285 @@
+.navbar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem 1.5rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar-container.scrolled {
+    padding: 0.75rem 1.5rem;
+}
+
+.navbar-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.6rem;
+    border-radius: 20px;
+    background: linear-gradient(115deg,
+            rgba(6, 78, 59, 0.45) 0%,
+            rgba(16, 185, 129, 0.15) 45%,
+            rgba(15, 23, 42, 0.5) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar-container.scrolled .navbar-content {
+    background: linear-gradient(115deg,
+            rgba(6, 78, 59, 0.85) 0%,
+            rgba(16, 185, 129, 0.6) 35%,
+            rgba(15, 23, 42, 0.9) 100%);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 1001;
+    transition: color 0.4s ease;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    transition: color 0.4s ease, transform 0.2s ease;
+}
+
+.navbar-container.scrolled .nav-logo {
+    color: #ffffff;
+}
+
+.nav-logo:hover {
+    transform: translateY(-1px);
+}
+
+/* Desktop Menu */
+.desktop-menu {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.45rem 0.7rem;
+    transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 0.6rem;
+    border: 1px solid transparent;
+    transform: translateY(0);
+}
+
+.navbar-container.scrolled .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-link:hover,
+.nav-link.active,
+.nav-link.hovered {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+    transform: translateY(-1px);
+}
+
+.navbar-container.scrolled .nav-link:hover,
+.navbar-container.scrolled .nav-link.active,
+.navbar-container.scrolled .nav-link.hovered {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.24);
+}
+
+.nav-link:focus-visible {
+    outline: none;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18);
+}
+
+.nav-indicator {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 4px;
+}
+
+.navbar-container.scrolled .nav-indicator {
+    background: #ffffff;
+}
+
+.nav-chevron {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 0.9;
+}
+
+.nav-chevron.open {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* Dropdown */
+.nav-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+    transform: none;
+    padding-top: 1.5rem;
+    /* Gap bridge */
+    cursor: default;
+}
+
+.dropdown-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    width: min(600px, calc(100vw - 3rem));
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.02);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.dropdown-item:hover {
+    background: linear-gradient(110deg, #fff4da 0%, #ffe8bf 100%);
+    transform: translateY(-1px);
+}
+
+.dropdown-icon {
+    color: var(--secondary);
+    background: rgba(211, 84, 0, 0.1);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.dropdown-text h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: var(--primary);
+}
+
+.dropdown-text p {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Mobile Bottom Bar */
+.mobile-bottom-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 0.75rem 1.5rem;
+    /* Safe area padding adjusted below */
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    z-index: 1000;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.mobile-nav-item.active {
+    color: var(--primary);
+    transform: translateY(-4px);
+}
+
+.mobile-nav-icon-container {
+    position: relative;
+    z-index: 2;
+}
+
+.mobile-active-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(45, 90, 39, 0.1);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Mobile Overlay Menu (for more items if needed) */
+/* Currently we fit all 3-4 items in bottom bar */
+
+@media (max-width: 768px) {
+    .desktop-menu {
+        display: none;
+    }
+
+    .navbar-container {
+        padding: 0.8rem 0.9rem;
+    }
+
+    .navbar-container.scrolled {
+        padding: 0.65rem 0.9rem;
+    }
+
+    .mobile-bottom-bar {
+        display: flex;
+    }
+
+    /* Adjust main content padding to not be hidden by bottom bar */
+    .footer-section {
+        padding-bottom: 6rem;
+    }
+}

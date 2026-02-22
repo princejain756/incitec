@@ -1,0 +1,1 @@
+loop the animation when tap to pour pour button is presses reverse from the end till the tap to pour part apppropriately ,and also put i am done when pressed it stops the animation
