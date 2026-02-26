@@ -8,6 +8,7 @@ import ProductsPage from './pages/ProductsPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import GlobalChat from './components/GlobalChat';
+import MascotFloater from './components/MascotFloater';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+      <MascotFloater />
       <GlobalChat />
       <SiteFooter />
     </div>

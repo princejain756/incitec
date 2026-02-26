@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Phone, X, Send } from 'lucide-react';
 import { companyInfo } from '../data/company';
 
+import mascotImg from '../assets/logo/mascot.webp';
+
 const GlobalChat = () => {
     const [isOpen, setIsOpen] = useState(false);
     const whatsappNumber = companyInfo.whatsapp.replace(/\D/g, '');
@@ -128,6 +130,7 @@ const GlobalChat = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
+                className={`chat-toggle-btn ${isOpen ? 'is-open' : 'is-closed'}`}
                 style={{
                     width: '60px',
                     height: '60px',
@@ -139,10 +142,32 @@ const GlobalChat = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     boxShadow: '0 10px 30px rgba(45, 90, 39, 0.4)',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    padding: 0,
+                    overflow: 'hidden'
                 }}
             >
-                {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
+                {isOpen ? (
+                    <X size={28} />
+                ) : (
+                    <>
+                        <div className="chat-icon-pc">
+                            <MessageCircle size={28} />
+                        </div>
+                        <div className="chat-icon-mobile">
+                            <img
+                                src={mascotImg}
+                                alt="Mascot"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    padding: '5px'
+                                }}
+                            />
+                        </div>
+                    </>
+                )}
             </motion.button>
         </div>
     );

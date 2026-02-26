@@ -9,10 +9,49 @@ import {
   BadgeCheck,
   Quote
 } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import ScrollSequence from '../components/ScrollSequence';
 import { companyInfo } from '../data/company';
 import { products } from '../data/products';
 import ProductGrid from '../components/ProductGrid';
+
+const HeroProductDetails = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  return (
+    <>
+      <button
+        onClick={() => setIsOpen(true)}
+        className="primary-link-btn"
+        style={{ background: '#fff', color: '#2d5a27', border: 'none', cursor: 'pointer' }}
+      >
+        View Full Details <ChevronRight size={18} style={{ marginLeft: '4px' }} />
+      </button>
+
+      {isOpen && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }} onClick={() => setIsOpen(false)}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            style={{ background: '#fff', padding: '3rem', borderRadius: '1.5rem', maxWidth: '600px', width: '100%', position: 'relative', color: '#111' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button onClick={() => setIsOpen(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: '#666' }}>&times;</button>
+            <span style={{ color: '#2d5a27', fontWeight: 800, fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Premium Grade</span>
+            <h2 style={{ fontSize: '2.5rem', marginTop: '0.5rem', marginBottom: '1rem' }}>DEFENDER</h2>
+            <p style={{ fontSize: '1.1rem', color: '#555', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+              DEFENDER is our flagship soil health protector. It goes beyond standard fertilization by actively shielding the root zone from stress while delivering targeted nutrition.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gap: '1rem' }}>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', fontSize: '1.05rem', color: '#333' }}><span style={{ color: '#2d5a27' }}>✓</span> Maximizes nutrient uptake efficiency</li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', fontSize: '1.05rem', color: '#333' }}><span style={{ color: '#2d5a27' }}>✓</span> Improves soil structure and water retention</li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', fontSize: '1.05rem', color: '#333' }}><span style={{ color: '#2d5a27' }}>✓</span> Highly recommended for Karnataka's diverse soil profiles</li>
+            </ul>
+          </motion.div>
+        </div>
+      )}
+    </>
+  );
+};
 
 const revealUp = {
   initial: { opacity: 0, y: 32 },
@@ -25,25 +64,25 @@ const trustFeatures = [
   {
     icon: ShieldCheck,
     title: 'Reliable Quality',
-    desc: 'All NPK mixtures and PGR solutions are sourced from vetted, high-standard manufacturers.',
+    desc: 'All Organic Manure and PGP solutions are sourced from vetted, high-standard manufacturers.',
     color: '#2d5a27'
   },
   {
     icon: MapPin,
-    title: 'Local Expertise',
-    desc: 'Deeply rooted in Karnataka, understanding specific soil and crop needs of the region.',
+    title: 'Dealer Network',
+    desc: 'Established network across Karnataka, ensuring availability and regional support.',
     color: '#1a6b5a'
   },
   {
     icon: Clock,
-    title: 'Fast Support',
-    desc: 'Quick turnaround on queries via WhatsApp for pricing and availability.',
+    title: 'Quick Service',
+    desc: 'Fast turnaround on product queries and requirement matching via WhatsApp.',
     color: '#d35400'
   },
   {
     icon: Award,
-    title: 'Certified Distributor',
-    desc: `Registered & compliant. GSTIN: ${companyInfo.gstNumber}`,
+    title: 'Certified Importers',
+    desc: 'Registered and authorized importers and marketers of agriculture inputs.',
     color: '#7b4f12'
   }
 ];
@@ -81,11 +120,10 @@ const HomePage = () => {
     [0, 0.05, 0.1, 0.15, 0.2, 0.25],
     [
       companyInfo.legalName,
-      'All NPK Mixtures',
-      'PGR Solutions',
-      'Herbicides & Weed Control',
-      'Karnataka Distributor',
-      'Connect with Earth'
+      'Organic Manure & Fertilizer',
+      'PGP Solutions',
+      'Karnataka Network',
+      'Connecting with Earth'
     ]
   );
 
@@ -95,8 +133,7 @@ const HomePage = () => {
     [
       'Wholesaler and distributor based in Karnataka',
       companyInfo.tagline,
-      'Reliable plant growth regulator supply for local agriculture',
-      'Supporting farms with herbicide and weed control products',
+      'Reliable plant growth promoter supply for agriculture',
       'Serving Karnataka with practical agri inputs',
       'Incitec Industries: Your partner in sustainable agriculture'
     ]
@@ -123,12 +160,63 @@ const HomePage = () => {
         </motion.div>
       </div>
 
+      {/* ── Trust Stats ── */}
+      <section className="trust-stats-section">
+        <div className="trust-stats-wrapper">
+          <div className="trust-stats-content">
+            <div className="trust-stat-item">
+              <div className="trust-stat-value">15,000+</div>
+              <div className="trust-stat-label">Tons Supplied</div>
+            </div>
+            <div className="trust-stat-item">
+              <div className="trust-stat-value">500+</div>
+              <div className="trust-stat-label">Dealers</div>
+            </div>
+            <div className="trust-stat-item">
+              <div className="trust-stat-value">100%</div>
+              <div className="trust-stat-label">Quality Assured</div>
+            </div>
+          </div>
+          <div className="trust-stat-item-clone" aria-hidden="true">
+            <div className="trust-stat-item">
+              <div className="trust-stat-value">15,000+</div>
+              <div className="trust-stat-label">Tons Supplied</div>
+            </div>
+            <div className="trust-stat-item">
+              <div className="trust-stat-value">1,800+</div>
+              <div className="trust-stat-label">Dealers</div>
+            </div>
+            <div className="trust-stat-item">
+              <div className="trust-stat-value">100%</div>
+              <div className="trust-stat-label">Quality Assured</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Products ── */}
-      <section className="section">
-        <h2 style={{ fontSize: '3.2rem', textAlign: 'center', marginBottom: '1rem', letterSpacing: '-0.03em' }}>Our Products</h2>
-        <p style={{ textAlign: 'center', color: '#444', maxWidth: '680px', margin: '0 auto 4rem', fontSize: '1.1rem' }}>
-          Explore our product range for fertilizers, NPK mixtures, PGRs, and crop support inputs.
-        </p>
+      <section className="section" style={{ paddingTop: '6rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <span style={{ display: 'inline-block', background: 'rgba(45,90,39,0.1)', color: '#2d5a27', padding: '0.3rem 0.9rem', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '1rem' }}>Catalog</span>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', marginBottom: '1rem', letterSpacing: '-0.03em' }}>Our Range</h2>
+          <p style={{ color: '#555', maxWidth: '680px', margin: '0 auto', fontSize: '1.15rem' }}>
+            Comprehensive agriculture inputs designed for reliable performance and sustainable growth.
+          </p>
+        </div>
+
+        {/* Hero Product Highlight */}
+        <div style={{ background: 'linear-gradient(135deg, #1e3c1a 0%, #2d5a27 100%)', borderRadius: '2rem', padding: 'clamp(2rem, 5vw, 4rem)', color: '#fff', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '3rem', marginBottom: '5rem', boxShadow: '0 24px 48px rgba(30, 60, 26, 0.2)' }}>
+          <div style={{ flex: '1 1 350px' }}>
+            <span style={{ display: 'inline-block', background: 'rgba(255,255,255,0.15)', padding: '0.4rem 1rem', borderRadius: '999px', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.3)' }}>Featured Product</span>
+            <h3 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: '#fff', marginBottom: '1rem', lineHeight: 1.1, letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>DEFENDER</h3>
+            <p style={{ fontSize: '1.15rem', opacity: 0.9, marginBottom: '2.5rem', lineHeight: 1.6, maxWidth: '500px' }}>Our most trusted soil health protector. Specially formulated to ensure maximum vitality for your crops, delivering robust and reliable outcomes season after season.</p>
+            <HeroProductDetails />
+          </div>
+          <div style={{ flex: '1 1 350px', display: 'flex', justifyContent: 'center' }}>
+            <img src={products[0].image} alt="DEFENDER" style={{ width: '100%', maxWidth: '380px', filter: 'drop-shadow(0 30px 40px rgba(0,0,0,0.5))', transform: 'scale(1.05)' }} />
+          </div>
+        </div>
+
         <ProductGrid items={products} />
         <div style={{ marginTop: '2.2rem', display: 'flex', justifyContent: 'center' }}>
           <Link to="/products" className="primary-link-btn">View All Products</Link>
@@ -155,7 +243,7 @@ const HomePage = () => {
               Built on Trust. Rooted in Karnataka.
             </h2>
             <p style={{ color: '#4d5a54', maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem' }}>
-              We're not just a distributor — we're your local agriculture partner.
+              We're not just a distributor — we're your agriculture partner.
             </p>
           </motion.div>
 
@@ -215,17 +303,7 @@ const HomePage = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <motion.div
             {...revealUp}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.6fr)',
-              gap: '4rem',
-              alignItems: 'center',
-              background: 'linear-gradient(145deg, #f9fcf8 0%, #edf5ec 100%)',
-              border: '1px solid #d8e8d8',
-              borderRadius: '2rem',
-              padding: '3.5rem',
-              boxShadow: '0 24px 48px rgba(45,90,39,0.07)'
-            }}
+            className="leadership-card"
           >
             {/* Left: visual badge */}
             <div style={{
@@ -280,7 +358,7 @@ const HomePage = () => {
                 borderLeft: '3px solid #2d5a27',
                 paddingLeft: '1.2rem'
               }}>
-                "At Incitec Industries, we believe that the right input at the right time is the difference between a harvest and a success. Our focus in Karnataka has always been to simplify the procurement of high-quality NPK mixtures and PGRs for our local farming community."
+                "At Incitec Industries, we believe that the right input at the right time is the difference between a harvest and a success. Our focus in Karnataka has always been to simplify the procurement of high-quality organic manure and PGPs for our farming community."
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <div style={{
@@ -327,7 +405,7 @@ const HomePage = () => {
               marginBottom: '1rem'
             }}>Social Proof</span>
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.03em' }}>
-              Trusted by Local Agriculture
+              Trusted by Agriculture
             </h2>
           </motion.div>
 
@@ -404,7 +482,7 @@ const HomePage = () => {
           </Link>
           <Link to="/about" className="quick-link-card">
             <h3>About</h3>
-            <p>Business profile, leadership, GST details and local focus.</p>
+            <p>Business profile, leadership, GST details and regional focus.</p>
           </Link>
           <Link to="/contact" className="quick-link-card">
             <h3>Contact</h3>

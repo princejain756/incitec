@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { MessageCircle, PhoneCall, MapPin } from 'lucide-react';
+import { MessageCircle, PhoneCall, MapPin, Facebook, Instagram } from 'lucide-react';
 import { companyInfo } from '../data/company';
 
 const ContactPage = () => {
@@ -73,8 +73,8 @@ const ContactPage = () => {
             <a className="cta-button cta-whatsapp" href={whatsappLeadUrl} target="_blank" rel="noreferrer">
               <MessageCircle size={18} /> Send Inquiry on WhatsApp
             </a>
-            <a className="cta-button cta-call" href="tel:+918041012823">
-              <PhoneCall size={18} /> Alternate Number
+            <a className="cta-button cta-call" href={`tel:${companyInfo.phones[0].replace(/\D/g, '')}`}>
+              <PhoneCall size={18} /> Call Primary
             </a>
           </div>
         </article>
@@ -101,15 +101,16 @@ const ContactPage = () => {
       <div className="contact-grid carousel-mobile" style={{ marginTop: '1.4rem' }}>
         <article className="contact-card">
           <h3>Contact Info</h3>
-          <p><a className="footer-link" href="tel:+917204641333">Primary: {companyInfo.phones[0]}</a></p>
+          <p><a className="footer-link" href={`tel:${companyInfo.phones[0].replace(/\D/g, '')}`}>Primary: {companyInfo.phones[0]}</a></p>
           <p><a className="footer-link" href={whatsappLeadUrl} target="_blank" rel="noreferrer">WhatsApp: {companyInfo.whatsapp}</a></p>
           <p className="footer-note">Service Area: {companyInfo.serviceArea}</p>
         </article>
 
         <article className="contact-card">
           <h3>Social & Web</h3>
-          <p><a className="footer-link" href={companyInfo.facebookUrl} target="_blank" rel="noreferrer">Facebook Page</a></p>
-          <p className="footer-note">{companyInfo.emailNote}</p>
+          <p><a className="footer-link" href={companyInfo.facebookUrl} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.4rem' }}><Facebook size={16} /> Facebook Page</a></p>
+          <p><a className="footer-link notranslate" href={companyInfo.instagramUrl} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Instagram size={16} /> Instagram</a></p>
+          <p className="footer-note" style={{ marginTop: '0.8rem' }}>{companyInfo.emailNote}</p>
         </article>
       </div>
 

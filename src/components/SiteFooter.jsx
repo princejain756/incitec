@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Facebook, MapPin, MessageCircle, PhoneCall } from 'lucide-react';
+import { ArrowRight, Facebook, MapPin, MessageCircle, PhoneCall, Instagram } from 'lucide-react';
 import { companyInfo } from '../data/company';
+import logoImg from '../assets/logo/logo.webp';
 
 const SiteFooter = () => {
   const whatsappNumber = companyInfo.whatsapp.replace(/\D/g, '');
@@ -27,11 +28,16 @@ const SiteFooter = () => {
 
       <div className="footer-main-grid">
         <div className="footer-brand-col">
-          <div className="footer-brand-logo">{companyInfo.shortName}</div>
+          <div className="footer-brand-logo">
+            <img src={logoImg} alt="Incitec Logo" style={{ height: '40px', width: 'auto', marginBottom: '0.5rem' }} />
+          </div>
           <p>{companyInfo.description}</p>
           <div className="footer-social-row">
             <a href={companyInfo.facebookUrl} target="_blank" rel="noreferrer" className="footer-social-pill">
               <Facebook size={16} /> Facebook
+            </a>
+            <a href={companyInfo.instagramUrl} target="_blank" rel="noreferrer" className="footer-social-pill notranslate">
+              <Instagram size={16} /> Instagram
             </a>
             <a href={whatsappUrl} target="_blank" rel="noreferrer" className="footer-social-pill">
               <MessageCircle size={16} /> WhatsApp
@@ -52,14 +58,12 @@ const SiteFooter = () => {
         <div className="footer-col">
           <h4>Contact</h4>
           <ul className="footer-list footer-list-contact">
-            <li>
-              <PhoneCall size={15} />
-              <a href="tel:+917204641333">{companyInfo.phones[0]}</a>
-            </li>
-            <li>
-              <PhoneCall size={15} />
-              <a href="tel:+918041012823">{companyInfo.phones[1]}</a>
-            </li>
+            {companyInfo.phones.map((phone, index) => (
+              <li key={index}>
+                <PhoneCall size={15} />
+                <a href={`tel:${phone.replace(/\D/g, '')}`}>{phone}</a>
+              </li>
+            ))}
             <li>
               <MessageCircle size={15} />
               <a href={whatsappUrl} target="_blank" rel="noreferrer">{companyInfo.whatsapp}</a>

@@ -13,6 +13,7 @@ import {
   Users2
 } from 'lucide-react';
 import { companyInfo } from '../data/company';
+import mascotImg from '../assets/logo/mascot.webp';
 
 const statItems = [
   {
@@ -67,26 +68,25 @@ const AboutPage = () => {
 
       <motion.header className="about-hero-panel" {...revealUp}>
         <div className="about-hero-copy">
-          <p className="about-eyebrow">Karnataka Agriculture Supply Network</p>
-          <h1>About {companyInfo.legalName}</h1>
-          <p>
+          <p className="about-eyebrow" style={{ boxShadow: '0 4px 12px rgba(45,90,39,0.15)' }}>Karnataka Agriculture Supply Network</p>
+          <h1 style={{ fontFamily: 'Outfit, sans-serif' }}>About {companyInfo.legalName}</h1>
+          <p style={{ fontSize: '1.15rem', lineHeight: 1.7, opacity: 0.85 }}>
             {companyInfo.legalName} is a Karnataka-based wholesaler and distributor serving agriculture and
             related supply needs in Karnataka with practical procurement, stock availability, and reliable
-            local support.
+            support.
           </p>
 
           <div className="about-focus-tags">
-            <span>NPK Mixtures</span>
-            <span>PGR Solutions</span>
-            <span>Herbicide & Weed Control</span>
-            <span>Fertilizer Distribution</span>
+            <span style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>Organic Manure</span>
+            <span style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>PGP Solutions</span>
+            <span style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>Fertilizer Distribution</span>
           </div>
         </div>
 
         <aside className="about-hero-meta">
           <h3>Why Farmers & Dealers Choose Us</h3>
           <ul>
-            <li>Local market understanding in Karnataka</li>
+            <li>Market understanding in Karnataka</li>
             <li>Fast product guidance and requirement matching</li>
             <li>WhatsApp-first communication for quick follow-up</li>
           </ul>
@@ -116,11 +116,16 @@ const AboutPage = () => {
 
       <div className="about-detail-grid carousel-mobile">
         <motion.article className="about-detail-card" {...revealUp}>
-          <h2>Company Profile</h2>
-          <p>
-            {companyInfo.legalName} is a {companyInfo.businessType.toLowerCase()} focused on fertilizers,
-            NPK mixtures, PGRs, and crop support products.
-          </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1.5rem' }}>
+            <div>
+              <h2>Company Profile</h2>
+              <p>
+                {companyInfo.legalName} is a {companyInfo.businessType.toLowerCase()} focused on fertilizers,
+                organic manure, and PGPs.
+              </p>
+            </div>
+            <img src={mascotImg} alt="Bhoomiputra Mascot" style={{ width: '80px', height: 'auto', borderRadius: '0.5rem', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))' }} />
+          </div>
           <div className="about-address-block">
             <h4>Office</h4>
             <p>{companyInfo.addressLines.join(', ')}</p>

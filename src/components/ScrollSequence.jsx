@@ -39,23 +39,27 @@ const ScrollSequence = ({ framesCount, path, checkpointFrame }) => {
         const img = images[idx - 1];
         if (img) {
             // Responsible for resizing/positioning on canvas
-            const canvasRatio = canvas.width / canvas.height;
+            const canvasRectWidth = canvas.width / (window.devicePixelRatio || 1);
+            const canvasRectHeight = canvas.height / (window.devicePixelRatio || 1);
+            const canvasRatio = canvasRectWidth / canvasRectHeight;
             const imgRatio = img.width / img.height;
             let drawWidth, drawHeight, drawX, drawY;
 
             if (canvasRatio > imgRatio) {
-                drawWidth = canvas.width;
-                drawHeight = canvas.width / imgRatio;
+                drawWidth = canvasRectWidth;
+                drawHeight = canvasRectWidth / imgRatio;
                 drawX = 0;
-                drawY = (canvas.height - drawHeight) / 2;
+                drawY = (canvasRectHeight - drawHeight) / 2;
             } else {
-                drawWidth = canvas.height * imgRatio;
-                drawHeight = canvas.height;
-                drawX = (canvas.width - drawWidth) / 2;
+                drawWidth = canvasRectHeight * imgRatio;
+                drawHeight = canvasRectHeight;
+                drawX = (canvasRectWidth - drawWidth) / 2;
                 drawY = 0;
             }
 
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.imageSmoothingEnabled = true;
+            context.imageSmoothingQuality = 'high';
+            context.clearRect(0, 0, canvasRectWidth, canvasRectHeight);
             context.drawImage(img, drawX, drawY, drawWidth, drawHeight);
         }
     };
@@ -120,8 +124,16 @@ const ScrollSequence = ({ framesCount, path, checkpointFrame }) => {
         };
 
         const handleResize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            const dpr = window.devicePixelRatio || 1;
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+
+            const context = canvas.getContext('2d');
+            context.scale(dpr, dpr);
+            context.imageSmoothingEnabled = true;
+            context.imageSmoothingQuality = 'high';
             render(frameIndex.current);
         };
 

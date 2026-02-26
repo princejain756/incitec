@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import '../styles/navbar.css';
+import logoImg from '../assets/logo/logo.webp';
+import mascotImg from '../assets/logo/mascot.webp';
 
 const productItems = [
   { name: 'DEFENDER', icon: <Database size={20} />, desc: 'Soil health protector' },
@@ -46,65 +48,71 @@ const Navbar = () => {
       <div className={`navbar-container ${isScrolled ? 'scrolled' : ''}`}>
         <div className="navbar-content">
           <Link to="/" className="nav-logo">
-            <Leaf className="logo-icon" color="currentColor" />
-            <span>INCITEC</span>
+            <img src={logoImg} alt="Incitec Logo" style={{ height: '64px', width: 'auto', margin: '-16px 0' }} />
+            <div className="nav-heritage-badge" style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(255,255,255,0.1)', padding: '4px 8px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', marginLeft: '8px' }}>
+              <img src={mascotImg} alt="Mascot" style={{ height: '24px', width: 'auto' }} />
+              <span style={{ fontSize: '0.65rem', fontWeight: 800, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>20 Years</span>
+            </div>
           </Link>
 
-          <nav className="desktop-menu">
-            <DesktopNavItem to="/" label="Home" end />
+          <div className="nav-right">
+            <nav className="desktop-menu">
+              <DesktopNavItem to="/" label="Home" end />
 
-            <div
-              className="nav-item"
-              onMouseEnter={() => setActiveDropdown('products')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <NavLink
-                to="/products"
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? 'active' : ''} ${activeDropdown === 'products' ? 'hovered' : ''}`
-                }
+              <div
+                className="nav-item"
+                onMouseEnter={() => setActiveDropdown('products')}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                Products
-                <ChevronDown size={14} className={`nav-chevron ${activeDropdown === 'products' ? 'open' : ''}`} />
-              </NavLink>
-              {isProductsActive && (
-                <motion.div
-                  className="nav-indicator"
-                  layoutId="navIndicator"
-                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                />
-              )}
-
-              <AnimatePresence>
-                {activeDropdown === 'products' && (
+                <NavLink
+                  to="/products"
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? 'active' : ''} ${activeDropdown === 'products' ? 'hovered' : ''}`
+                  }
+                >
+                  Products
+                  <ChevronDown size={14} className={`nav-chevron ${activeDropdown === 'products' ? 'open' : ''}`} />
+                </NavLink>
+                {isProductsActive && (
                   <motion.div
-                    className="nav-dropdown"
-                    initial={{ opacity: 0, y: 10, rotateX: -10 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    exit={{ opacity: 0, y: 10, rotateX: -10 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="dropdown-card">
-                      {productItems.map((item) => (
-                        <Link to="/products" key={item.name} className="dropdown-item">
-                          <div className="dropdown-icon">{item.icon}</div>
-                          <div className="dropdown-text">
-                            <h4>{item.name}</h4>
-                            <p>{item.desc}</p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
+                    className="nav-indicator"
+                    layoutId="navIndicator"
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  />
                 )}
-              </AnimatePresence>
-            </div>
 
-            <DesktopNavItem to="/about" label="About" />
-            <DesktopNavItem to="/contact" label="Contact" />
-          </nav>
+                <AnimatePresence>
+                  {activeDropdown === 'products' && (
+                    <motion.div
+                      className="nav-dropdown"
+                      initial={{ opacity: 0, y: 10, rotateX: -10 }}
+                      animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                      exit={{ opacity: 0, y: 10, rotateX: -10 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="dropdown-card">
+                        {productItems.map((item) => (
+                          <Link to="/products" key={item.name} className="dropdown-item">
+                            <div className="dropdown-icon">{item.icon}</div>
+                            <div className="dropdown-text">
+                              <h4>{item.name}</h4>
+                              <p>{item.desc}</p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <DesktopNavItem to="/about" label="About" />
+              <DesktopNavItem to="/contact" label="Contact" />
+            </nav>
+            <div id="google_translate_element" className="translate-widget"></div>
+          </div>
         </div>
-      </div>
+      </div >
 
       <div className="mobile-bottom-bar">
         <MobileNavItem to="/" icon={<Home size={24} />} label="Home" end />
